@@ -1,5 +1,13 @@
 dist_url: https://dist.ipfs.io
-ipfs_cluster_secret: "use `od  -vN 32 -An -tx1 /dev/urandom | tr -d ' \n' ; echo` to generate this"
+ipfs_cluster_secret: "f77114235a31eb766418ce50280ef17deb8760985b3c05b9630c633acffa7823"
 ipfs_cluster_arch: amd64
-ipfs_cluster_version: v0.10.0
+ipfs_cluster_version: v0.14.2
 ipfs_cluster_fd_max: 10000
+ipfs_cluster_consensus: crdt #newest
+ipfs_cluster_crdt_cluster_name: poc-ipfs-azure
+ipfs_cluster_crdt_trusted_peers: 
+#{% for host in groups['ipfs'] %}
+#  - "{{ hostvars[host]['ipfs_cluster_id'] }}" #{% if not loop.last %},{% endif %}
+#{% endfor %}
+  - "QmZPA3dExbGxJnTabHB5JoTQtNmPKqQnvnX44oAruUXdTW"
+  - "QmPpmuvM5Pit1FmyyDg5vAvB84htwJU6g59nqryN4Hxc1C"

@@ -1,6 +1,7 @@
 # install setfacl, needed by become
 
 - name: Install setfacl, via the apt acl package
+  become: yes
   apt:
     name: acl
     state: present
