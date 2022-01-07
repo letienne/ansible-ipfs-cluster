@@ -1,6 +1,6 @@
 all: ipfs ipfs-cluster
 ipfs:
-	ansible-playbook -i inventory.yml ipfs.yml
+	/Users/letienne/Library/Python/3.8/bin/ansible-playbook -i inventory.yml ipfs.yml
 ipfs-cluster:
-	ansible-playbook -i inventory.yml ipfs-cluster.yml
+	/Users/letienne/Library/Python/3.8/bin/ansible-playbook -i inventory.yml ipfs-cluster.yml
 .PHONY = all ipfs ipfs-cluster

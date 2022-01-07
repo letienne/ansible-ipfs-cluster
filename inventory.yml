@@ -1,5 +1,6 @@
 [ipfs]
 # Write here your ipfs nodes
+40.118.124.217
 
 [ipfs_cluster:children]
 ipfs

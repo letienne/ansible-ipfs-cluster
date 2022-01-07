@@ -1,14 +1,28 @@
 dist_url: https://dist.ipfs.io
-ipfs_version: v0.4.19
+ipfs_version: v0.11.0
 ipfs_arch: amd64
 ipfs_home: /home/ipfs
-ipfs_storage_max: 10G
-ipfs_bloom_filter_size: 1048576 # 1MB
+ipfs_storage_max: 1024G
+ipfs_bloom_filter_size: 1199120 # https://hur.st/bloomfilter/?n=1e6&p=0.01&m=&k=7
 ipfs_api_listen: /ip4/127.0.0.1/tcp/5001
-ipfs_fd_max: 4092
-ipfs_use_badger: false
+ipfs_fd_max: 8192 # https://medium.com/coinmonks/ipfs-production-configuration-57121f0daab2
+ipfs_use_badger: true # https://docs.ipfs.io/how-to/configure-node/#profiles
 ipfs_discovery: false
 ipfs_disk_sync: true
-ipfs_routing: dht
+ipfs_routing: dhtclient # ease the load on the server
 ipfs_disable_bandthwidth_metrics: false
-ipfs_reprovider_strategy: all
+ipfs_reprovider_strategy: pinned # only advertise pinned data from the cluster. No cached data.
+ipfs_connmgr_high_water: 400 # we will peer manually with what we need
+ipfs_connmgr_low_water: 200 # we will peer manually with what we need
+ipfs_public_gateways: 
+  localhost:
+    Paths:
+    - "/ipfs"
+    - "/ipns"
+    UseSubdomains: false
+  "*.tamastream.xyz":
+    Paths:
+    - "/ipfs"
+    - "/ipns"
+    UseSubdomains: false
+ipfs_manual_peering: true 

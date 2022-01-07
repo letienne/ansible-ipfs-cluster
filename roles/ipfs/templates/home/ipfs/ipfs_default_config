@@ -194,7 +194,18 @@
     "Router": ""
   },
   "Peering": {
-    "Peers": null
+    "Peers":
+{% if ipfs_manual_peering == true %}
+[
+  {% for host in groups['ipfs'] %}
+        {% if hostvars[host]['ipfs_peer_json'] is defined %}
+          {{ hostvars[host]['ipfs_peer_json'] | to_nice_json(indent=2) | indent(6) }}{% if not loop.last %},{% endif %}
+        {% endif %}
+  {% endfor %}
+]
+{% else %}
+    null
+{% endif %}
   },
   "Reprovider": {
     "Interval": "12h",
