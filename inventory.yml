@@ -1,6 +1,8 @@
-[ipfs]
-40.118.124.217
-40.118.104.145
+[ipfs] # must be IPs because they are used for nginx ACLs
+20.123.198.207
+20.103.255.212
 
 [ipfs_cluster:children]
 ipfs
+
+[backend] # must be IPs because they are used for nginx ACLs

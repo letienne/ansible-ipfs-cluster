@@ -65,10 +65,13 @@
     "crdt": {
       "cluster_name": "{{ ipfs_cluster_crdt_cluster_name | default('ipfs-cluster') }}",
       "trusted_peers": [
-{% for p in ipfs_cluster_crdt_trusted_peers | default([]) %}
-          "{{ p }}"{% if not loop.last %},{% endif %}
-
-{% endfor %}
+{% if ipfs_cluster_crdt_trusted_peers_loop == true %}
+      {% for host in groups['ipfs'] %}
+          "{{ hostvars[host]['ipfs_cluster_id'] }}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+{% else %}
+    null
+{% endif %}      
       ],
       "rebroadcast_interval": "{{ ipfs_cluster_crdt_rebroadcast_interval | default('1m') }}",
       "peerset_metric": "{{ ipfs_cluster_crdt_peerset_metric | default('ping') }}",

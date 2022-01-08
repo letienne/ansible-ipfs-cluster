@@ -140,3 +140,31 @@
     name: ipfs
     state: started
     enabled: yes
+
+- name: install nginx
+  become: yes
+  apt:
+    name: nginx
+    state: present
+
+- name: install nginx ipfs-config file
+  become: yes
+  template:
+    src: etc/nginx/sites-available/ipfs.conf
+    dest: /etc/nginx/sites-available/{{ipfs_cluster_dnsname}}.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart nginx
+  
+- name: symlink to enable ipfs-prod website
+  become: yes
+  file:
+    state: link
+    owner: root
+    group: root
+    dest: /etc/nginx/sites-enabled/{{ipfs_cluster_dnsname}}.conf
+    src: /etc/nginx/sites-available/{{ipfs_cluster_dnsname}}.conf
+  notify:
+    - restart nginx

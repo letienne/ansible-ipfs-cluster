@@ -59,6 +59,7 @@
       "{{ p }}"{% if not loop.last %},{% endif %}
   {% endfor %}
 {% else %}
+      "/ip4/10.0.0.0/ipcidr/8",
       "/ip4/100.64.0.0/ipcidr/10",
       "/ip4/169.254.0.0/ipcidr/16",
       "/ip4/172.16.0.0/ipcidr/12",
@@ -139,13 +140,24 @@
     "PublicGateways": {{ ipfs_public_gateways | default(None) | to_nice_json(indent=2) | indent(6) }}
   },
   "API": {
-    "HTTPHeaders": {}
+    "HTTPHeaders": {
+      "Access-Control-Allow-Methods": [
+        "PUT",
+        "POST",
+        "GET"
+      ],
+      "Access-Control-Allow-Origin": [
+        "http://localhost:3000",
+        "http://127.0.0.1:5001",
+        "http://localhost:5001",
+        "http://{{ipfs_cluster_dnsname}}",
+        "https://{{ipfs_cluster_dnsname}}"
+      ]
+    }
   },
   "Swarm": {
     "DisableBandwidthMetrics": {{ ipfs_disable_bandwidth_metrics | default(False) | lower }},
     "DisableNatPortMap": true,
-    "DisableRelay": {{ ipfs_disable_relay | default(False) | lower }},
-    "EnableAutoNATService": false,
     "EnableAutoRelay": false,
     "EnableRelayHop": false,
     "Transports": {
@@ -195,7 +207,7 @@
   },
   "Peering": {
     "Peers":
-{% if ipfs_manual_peering == true %}
+{% if ipfs_force_peering == true %}
 [
   {% for host in groups['ipfs'] %}
         {% if hostvars[host]['ipfs_peer_json'] is defined %}

@@ -9,6 +9,8 @@ Each file should contain the following variables, updated for your cluster:
 ipfs_peer_id: "<ipfs_daemon_peer_id>"
 ipfs_private_key: "<ipfs_daemon_private_key>"
 
+ipfs_peer_json: "{\"ID\": \"<ipfs_daemon_peer_id>\",\"Addrs\": [\"/dns4/<hostname>/tcp/4001\"]}" # can be configured as well to be able to force manual peering between nodes. Comment to disable peering
+
 ipfs_cluster_id: "<cluster_peer_id>"
 ipfs_cluster_private_key: "<cluster_peer_private_key>"
 

@@ -5,9 +5,13 @@ ipfs_cluster_version: v0.14.2
 ipfs_cluster_fd_max: 10000
 ipfs_cluster_consensus: crdt #newest
 ipfs_cluster_crdt_cluster_name: poc-ipfs-azure
-ipfs_cluster_crdt_trusted_peers: 
-#{% for host in groups['ipfs'] %}
-#  - "{{ hostvars[host]['ipfs_cluster_id'] }}" #{% if not loop.last %},{% endif %}
-#{% endfor %}
-  - "QmZPA3dExbGxJnTabHB5JoTQtNmPKqQnvnX44oAruUXdTW"
-  - "QmPpmuvM5Pit1FmyyDg5vAvB84htwJU6g59nqryN4Hxc1C"
+
+ipfs_cluster_crdt_trusted_peers_loop: true # replaces the below
+#ipfs_cluster_crdt_trusted_peers: 
+  #{% for host in groups['ipfs'] %}
+  #{{ hostvars[host]['ipfs_cluster_id'] -}}
+  #{% endfor %}
+  #- "QmZPA3dExbGxJnTabHB5JoTQtNmPKqQnvnX44oAruUXdTW"
+  #- "QmPpmuvM5Pit1FmyyDg5vAvB84htwJU6g59nqryN4Hxc1C"
+
+ipfs_cluster_dnsname: ipfs-prod.tamastream.xyz # used for nginx config

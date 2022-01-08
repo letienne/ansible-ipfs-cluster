@@ -10,7 +10,7 @@ ipfs_use_badger: true # https://docs.ipfs.io/how-to/configure-node/#profiles
 ipfs_discovery: false
 ipfs_disk_sync: true
 ipfs_routing: dhtclient # ease the load on the server
-ipfs_disable_bandthwidth_metrics: false
+ipfs_disable_bandwidth_metrics: false
 ipfs_reprovider_strategy: pinned # only advertise pinned data from the cluster. No cached data.
 ipfs_connmgr_high_water: 400 # we will peer manually with what we need
 ipfs_connmgr_low_water: 200 # we will peer manually with what we need
@@ -25,4 +25,5 @@ ipfs_public_gateways:
     - "/ipfs"
     - "/ipns"
     UseSubdomains: false
-ipfs_manual_peering: true 
+ipfs_force_peering: true 
+ipfs_enable_gc: true # not sure why their default is false? 

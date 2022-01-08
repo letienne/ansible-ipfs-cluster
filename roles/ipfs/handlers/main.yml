@@ -15,3 +15,10 @@
     name: ipfs
     enabled: yes
     state: restarted
+
+- name: restart nginx
+  become: yes
+  service:
+    name: nginx
+    enabled: yes
+    state: restarted
